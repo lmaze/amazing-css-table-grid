@@ -1,0 +1,224 @@
+@charset "UTF-8";
+@import "version";
+/*!
+* Amazing CSS Table Grid
+* Create powerful multi-device layouts quickly and easily with this grid system based on the display table CSS property.
+*
+* @project Amazing CSS Table Grid
+* @version #{$grid-version}
+* @author Loïc Mazé
+* @license MIT Open Source
+*/
+// Final output generated with : sass table-grid.scss ../css/table-grid.css --style expanded
+
+
+@import "config";
+@import "init-next-css";
+
+
+// Get the prefix to add for most CSS class names
+@function get-col-prefix($col-type) {
+    @return #{$namespace}#{$col-type};
+}
+
+
+// Lines ordering
+@mixin grid-lines-ordering($col-prefix) {
+    .#{$namespace}row > .#{$col-prefix}-first-line {
+        display: table-caption;
+        caption-side: top;
+    }
+    .#{$namespace}row > .#{$col-prefix}-last-line {
+        display: table-caption;
+        caption-side: bottom;
+    }
+}
+
+
+// Gutters
+@mixin grid-gutters($col-type, $col-prefix) {
+    $sm-col-prefix: get-col-prefix(sm);
+    $md-col-prefix: get-col-prefix(md);
+    $lg-col-prefix: get-col-prefix(lg);
+        
+    @if $col-type == sm {
+        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"] {
+            padding-left: 0;
+        }
+        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"] {
+            padding-left: $gutter-width; /*! Gutter width */
+        }
+    } @else if $col-type == md {
+        .#{$sm-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"],
+        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"] {
+            padding-left: 0;
+        }
+        .#{$sm-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"],
+        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"] {
+            padding-left: $gutter-width; /*! Gutter width */
+        }
+    } @else if $col-type == lg {
+        .#{$sm-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"],
+        .#{$md-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"],
+        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"] {
+            padding-left: 0;
+        }
+        .#{$sm-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"],
+        .#{$md-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"],
+        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"] {
+            padding-left: $gutter-width; /*! Gutter width */
+        }
+    } @else if $col-type == xl {
+        .#{$sm-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"],
+        .#{$md-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"],
+        .#{$lg-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"],
+        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"] {
+            padding-left: 0;
+        }
+        .#{$sm-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"],
+        .#{$md-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"],
+        .#{$lg-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"],
+        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"] {
+            padding-left: $gutter-width; /*! Gutter width */
+        }
+    } @else {
+        @error "$col-type must be sm,md,lg or xl, but was #{$col-type}.";
+    }
+    
+    .#{$col-prefix}-cols-collapsed > [class*="-col-"] + [class*="-col-"] {
+        padding-left: 0;
+    }
+}
+
+
+// Columns horizontal alignment
+@mixin grid-cols-horizontal-align($col-prefix) {
+    .#{$col-prefix}-cols-center:before,
+    .#{$col-prefix}-cols-center:after,
+    .#{$col-prefix}-cols-right:before,
+    .#{$col-prefix}-cols-left:after {
+        content: "";
+        display: table-cell;
+    }
+    .#{$col-prefix}-cols-horizontal-reset:before,
+    .#{$col-prefix}-cols-horizontal-reset:after {
+        content: "";
+        display: none;
+    }
+}
+
+
+// Columns vertical alignment
+@mixin grid-cols-vertical-align($col-prefix) {
+    .#{$col-prefix}-cols-top > [class*="-col-"] {
+        vertical-align: top;
+    }
+    .#{$col-prefix}-cols-middle > [class*="-col-"] {
+        vertical-align: middle;
+    }
+    .#{$col-prefix}-cols-bottom > [class*="-col-"] {
+        vertical-align: bottom;
+    }
+    .#{$col-prefix}-cols-vertical-reset > [class*="-col-"] {
+        vertical-align: baseline;
+    }
+}
+
+
+// Specific column vertical alignment
+@mixin grid-col-vertical-align($col-prefix) {
+    [class*="-col-"].#{$col-prefix}-col-top {
+        vertical-align: top;
+    }
+    [class*="-col-"].#{$col-prefix}-col-middle {
+        vertical-align: middle;
+    }
+    [class*="-col-"].#{$col-prefix}-col-bottom {
+        vertical-align: bottom;
+    }
+    [class*="-col-"].#{$col-prefix}-col-vertical-reset {
+        vertical-align: baseline;
+    }
+}
+
+
+// Columns visibility
+@mixin grid-cols-visibility($col-prefix) {
+    .#{$namespace}row > [class*="#{$col-prefix}-col-hidden"] {
+        display: none;
+    }
+}
+
+
+// Columns width
+@mixin grid-cols-width($col-prefix) {
+    .#{$namespace}row > [class*="#{$col-prefix}-col-size-"] {
+        display: table-cell;
+    }
+    .#{$col-prefix}-col-size-auto {
+        width: auto;
+    }
+    
+    @for $col-number from 1 through $number-of-columns {
+        .#{$col-prefix}-col-size-#{$col-number} {
+            width: percentage(($col-number / $number-of-columns));
+        }
+    }
+}
+
+
+// Make styles for a type of column
+@mixin grid-for-col-type($col-type) {
+    $col-prefix: get-col-prefix($col-type);
+    // Be careful! The order of inclusion is important
+    @include grid-lines-ordering($col-prefix);
+    @include grid-gutters($col-type, $col-prefix);
+    @include grid-cols-horizontal-align($col-prefix);
+    @include grid-cols-vertical-align($col-prefix);
+    @include grid-col-vertical-align($col-prefix);
+    @include grid-cols-visibility($col-prefix);
+    @include grid-cols-width($col-prefix);
+}
+
+
+// Grid
+@mixin grid() {
+    .#{$namespace}row,
+    .#{$namespace}row > * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    .#{$namespace}row {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    .#{$namespace}row > * {
+        display: block;
+        word-wrap: break-word;
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        -ms-hyphens: auto;
+        hyphens: auto;
+    }
+    
+    @include grid-for-col-type(sm);
+    @media #{$medium-up-media-query} {
+        @include grid-for-col-type(md);
+    }
+    @media #{$large-up-media-query} {
+        @include grid-for-col-type(lg);
+    }
+    @if $use-xl-columns {
+        @media #{$xlarge-up-media-query} {
+            @include grid-for-col-type(xl);
+        }
+    }
+}
+
+
+// -- Make all styles for the grid
+@include grid();

@@ -1,0 +1,29 @@
+// ---------------------
+// == Config file
+// ---------------------
+
+// Set a prefix for all the CSS class names
+$namespace: "" !default;
+
+// Enable or disable the xl columns
+$use-xl-columns: false !default;
+
+// Set the width of the gutters
+$gutter-width: 10px !default;
+
+// Set the total number of columns
+$number-of-columns: 12 !default;
+
+// Set the media queries configuration
+$medium-breakpoint: 768px !default;
+$large-breakpoint: 992px !default;
+$xlarge-breakpoint: 1200px !default;
+$medium-up-media-query: "only screen and (min-width:#{$medium-breakpoint})" !default;
+$large-up-media-query: "only screen and (min-width:#{$large-breakpoint})" !default;
+$xlarge-up-media-query: "only screen and (min-width:#{$xlarge-breakpoint})" !default;
+
+// Enable or disable the use of future CSS's features
+$target-next-css: false !default;
+$medium-custom-media-name: "md-viewport" !default;
+$large-custom-media-name: "lg-viewport" !default;
+$xlarge-custom-media-name: "xl-viewport" !default;

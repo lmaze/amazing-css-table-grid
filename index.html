@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Amazing CSS table grid</title>
+    <meta name="description" content="CSS grid system based on the display table property.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/table-grid.css" rel="stylesheet">
+    <link href="doc/css/doc.css" rel="stylesheet">
+    <!--[if lte IE 8]>
+    <script src="doc/js/only-for-ie8/html5shiv/html5shiv.min.js"></script>
+    <![endif]-->
+    <!--[if IE 8]>
+    <script src="doc/js/only-for-ie8/respond/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1 class="header-title">
+                <a href="https://github.com/lmaze/amazing-css-table-grid" target="_blank">Amazing CSS table grid</a>
+            </h1>
+            <p class="header-introduction inner-container">Create powerful multi-device layouts quickly and easily with this pure CSS grid system based on the display table property. If you're familiar with grid systems, you'll feel right at home. If not, you'll learn quickly.</p>
+            <iframe src="https://ghbtns.com/github-btn.html?user=lmaze&repo=amazing-css-table-grid&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+        </header>
+
+
+        <main class="inner-container">
+            <section class="main-introduction">
+                <h1 class="visuallyhidden">Introduction</h1>
+
+                <h2>Why another grid ?</h2>
+                <p>Almost all current grid systems are based on the display <code>inline-block</code> CSS property or on floating elements. There are several problems and limitations with this approach. For example it is not possible to easily make columns of the same height or vertically aligning column content. The use of negative margins can also be problematic. So here is a grid based on the display <code>table</code> property which making some kind of magic ;-)</p>
+
+                <h2>Compatibility</h2>
+                <p>You can use this grid system with all browsers that are compatible with CSS 2.1. In practice it covers almost all browsers except Internet Explorer below version 8. You can get more information on <a href="http://caniuse.com/#feat=css-table" target="_blank">caniuse</a>.</p>
+                <p>If you want the grid to be responsive in IE8 you must include a polyfill like <a href="https://github.com/scottjehl/Respond" target="_blank">Respond.js</a> to support media queries. This operation is not necessary for other browsers, <strong>only CSS is needed</strong>.</p>
+                
+                <h2>Which version do you need?</h2>
+                <p>This grid comes in three flavours : classic version, postprocessor version, and Sass version.</p>
+                <h3>Classic version</h3>
+                <p>If you aim to use this grid system without changing it's configuration, just download the CSS file <code>table-grid.css</code> in your project. You should at least rewrite the media queries to have custom breakpoints.</p>
+                <h3>Postprocessor version</h3>
+                <p>If you use only a postprocessor like <a href="http://pleeease.io/" target="_blank">Pleeease</a> or <a href="http://www.myth.io/" target="_blank">Myth</a>, you should grab the CSS file <code>table-grid.next.css</code>. At the start of this file you can change the custom media queries and set the custom properties with your own values.</p>
+                <h3>Sass version</h3>
+                <p>If you're used to deal with the <a href="http://sass-lang.com/" target="_blank">Sass</a> preprocessor, your best choice is to install this version : it is far more flexible and scalable than the basic CSS and the postprocessor versions. In the <code>_config.scss</code> file you can :</p>
+                <ul>
+                    <li>Enable the xl columns</li>
+                    <li>Set a prefix for all the CSS class names (<code>tg-</code> for example)</li>
+                    <li>Set the width of the gutters</li>
+                    <li>Set the total number of columns</li>
+                    <li>Set the media queries configuration</li>
+                    <li>Enable the use of future CSS's features (postprocessor required) and set the custom media queries configuration</li>
+                </ul>
+
+
+                <h2>Download</h2>
+                <p>All versions of this amazing CSS table grid are available on <a href="https://github.com/lmaze/amazing-css-table-grid" target="_blank">GitHub</a>.</p>
+            </section>
+
+
+            <section>
+                <h1 class="visuallyhidden">Some examples</h1>
+
+                <h2>Basic</h2>
+                <p>Start by adding an element with a class of <code>row</code>. This will create a horizontal block to contain vertical columns. Then add immediate children into that row and specify the widths of each column with the <code>sm-col-size-#</code>, <code>md-col-size-#</code>, and <code>lg-col-size-#</code> classes.</p>
+                <p>This grid system has 12 columns by default, like most other grids. <strong>It is not possible to exceed 12 columns per row.</strong></p>
+                <p>This grid is mobile-first. Code for small screens first, and larger devices will inherit those styles. Customize for larger screens as necessary.</p>
+                <div class="row">
+                    <div class="sm-col-size-2">.sm-col-size-2</div>
+                    <div class="sm-col-size-6">.sm-col-size-6</div>
+                    <div class="sm-col-size-4">.sm-col-size-4</div>
+                </div>
+
+
+                <h2>Equal columns</h2>
+                <p>You can define columns of the same size with the <code>#-col-size-auto</code> classes.</p>
+                <div class="row">
+                    <div class="sm-col-size-auto">.sm-col-size-auto</div>
+                    <div class="sm-col-size-auto">.sm-col-size-auto</div>
+                    <div class="sm-col-size-auto">.sm-col-size-auto</div>
+                </div>
+                <p>If you use the <code>#-col-size-auto</code> classes with other columns already having a size, columns with the class <code>#-col-size-auto</code> will take the remaining size of the row.</p>
+                <div class="row">
+                    <div class="sm-col-size-3">.sm-col-size-3</div>
+                    <div class="sm-col-size-auto">.sm-col-size-auto</div>
+                    <div class="sm-col-size-3">.sm-col-size-3</div>
+                </div>
+
+
+                <h2>Nested columns</h2>
+                <p>You can nest the grids indefinitely.</p>
+                <div class="row">
+                    <div class="sm-col-size-8">.row > .sm-col-size-8
+                        <div class="row">
+                            <div class="sm-col-size-8">.row > .sm-col-size-8</div>
+                            <div class="sm-col-size-4">.row > .sm-col-size-4</div>
+                        </div>
+                    </div>
+                    <div class="sm-col-size-4">.row > .sm-col-size-4</div>
+                </div>
+
+
+                <h2>Mixed: small, medium and large screens</h2>
+                <p>This grid system has three tiers of classes: <code>sm</code> (phones), <code>md</code> (tablets), <code>lg</code> (desktops). You can also enable a <code>xl</code> class if you use the Sass version of the grid. You can use nearly any combination of these classes to create more dynamic and flexible layouts.<p>
+                <p>Each tier of classes scales up, meaning if you plan on setting the same widths for <code>sm</code> and <code>md</code>, you only need to specify <code>sm</code>.</p>
+                <div class="row">
+                    <div class="sm-col-size-4 md-col-size-8">.sm-col-size-4 .md-col-size-8"</div>
+                    <div class="sm-col-size-8 md-col-size-4">.sm-col-size-8 .md-col-size-4</div>
+                </div>
+
+
+                <h2>Hide columns</h2>
+                <p>You can hide columns with the class <code>#-col-hidden</code>.</p>
+                <div class="row">
+                    <div class="sm-col-hidden md-col-size-4">.sm-col-hidden .md-col-size-4</div>
+                    <div class="sm-col-size-6 md-col-size-4">.sm-col-size-6 .md-col-size-4</div>
+                    <div class="sm-col-size-6 md-col-size-4">.sm-col-size-6 .md-col-size-4</div>
+                </div>
+
+
+                <h2>Lines</h2>
+                <p>If no size has been defined on the columns, then they will stack on top of each other. This is very useful if you are developing with the mobile first approach.</p>
+                <div class="row">
+                    <div>Line 1</div>
+                    <div>Line 2</div>
+                    <div>Line 3</div>
+                </div>
+                <p>You can set the size of columns when using a "larger" class.</p>
+                <div class="row">
+                    <div class="md-col-size-4">Line 1 | .md-col-size-4</div>
+                    <div class="md-col-size-4">Line 2 | .md-col-size-4</div>
+                    <div class="md-col-size-4">Line 3 | .md-col-size-4</div>
+                </div>
+
+
+                <h2>Lines ordering</h2>
+                <p>When the columns are stacked, it is possible to reorder them with the <code>#-first-line</code> and <code>#-last-line</code> classes. These two classes can be used only when no size was defined on the columns.</p>
+                <p></p>
+                <p>The class <code>#-first-line</code> allows to position a line above all others.</p>
+                <div class="row">
+                    <div>Line 1</div>
+                    <div>Line 2</div>
+                    <div class="sm-first-line">Line 3 | .sm-first-line</div>
+                </div>
+                <p>The class <code>#-last-line</code> allows to position a line below all others.</p>
+                <div class="row">
+                    <div class="sm-last-line">Line 1 | .sm-last-line</div>
+                    <div>Line 2</div>
+                    <div>Line 3</div>
+                </div>
+
+
+                <h2>Align horizontally</h2>
+                <p>If your row doesn't have a count that adds up to 12 columns, you can horizontally align the columns.</p>
+                <p>To align the columns to the left, use the class <code>#-cols-left</code> on the row.</p>
+                <div class="row sm-cols-left">
+                    <div class="sm-col-size-3">.sm-cols-left > *</div>
+                    <div class="sm-col-size-3">.sm-cols-left > *</div>
+                </div>
+                <p>To center the columns, use the class <code>#-cols-center</code> on the row.</p>
+                <div class="row sm-cols-center">
+                    <div class="sm-col-size-3">.sm-cols-center > *</div>
+                    <div class="sm-col-size-3">.sm-cols-center > *</div>
+                </div>
+                <p>To align the columns to the right, use the class <code>#-cols-right</code> on the row.</p>
+                <div class="row sm-cols-right">
+                    <div class="sm-col-size-3">.sm-cols-right > *</div>
+                    <div class="sm-col-size-3">.sm-cols-right > *</div>
+                </div>
+                <p>To restore the default alignment, use the class <code>#-cols-horizontal-reset</code> on the row.</p>
+                <div class="row sm-cols-center md-cols-horizontal-reset">
+                    <div class="sm-col-size-3 md-col-size-6">.md-cols-horizontal-reset > *</div>
+                    <div class="sm-col-size-3 md-col-size-6">.md-cols-horizontal-reset > *</div>
+                </div>
+
+
+                <h2>Align vertically</h2>
+                <p>You can vertically align the content of the columns.</p>
+                <p>To align the content of the columns to the top, use the class <code>#-cols-top</code> on the row.</p>
+                <div class="row sm-cols-top">
+                    <div class="sm-col-size-6">.sm-cols-top > *</div>
+                    <div class="sm-col-size-6">.sm-cols-top > *</div>
+                </div>
+                <p>To center vertically the content of the columns, use the class <code>#-cols-middle</code> on the row.</p>
+                <div class="row sm-cols-middle">
+                    <div class="sm-col-size-6">.sm-cols-middle > *</div>
+                    <div class="sm-col-size-6">.sm-cols-middle > *</div>
+                </div>
+                <p>To align the content of the columns to the bottom, use the class <code>#-cols-bottom</code> on the row.</p>
+                <div class="row sm-cols-bottom">
+                    <div class="sm-col-size-6">.sm-cols-bottom > *</div>
+                    <div class="sm-col-size-6">.sm-cols-bottom > *</div>
+                </div>
+                <p>To restore the default alignment, use the class <code>#-cols-vertical-reset</code> on the row.</p>
+                <div class="row sm-cols-middle md-cols-vertical-reset">
+                    <div class="sm-col-size-6">.md-cols-vertical-reset > *</div>
+                    <div class="sm-col-size-6">.md-cols-vertical-reset > *</div>
+                </div>
+
+
+                <h2>Align the content of a column vertically</h2>
+                <p>You can vertically align the content of a specific column.</p>
+                <p>To align the content of a column to the top, use the class <code>#-col-top</code> directly on the column.</p>
+                <div class="row">
+                    <div class="sm-col-size-6">*</div>
+                    <div class="sm-col-size-6 sm-col-top">.sm-col-top</div>
+                </div>
+                <p>To center vertically the content of a column, use the class <code>#-col-middle</code> directly on the column.</p>
+                <div class="row">
+                    <div class="sm-col-size-6">*</div>
+                    <div class="sm-col-size-6 sm-col-middle">.sm-col-middle</div>
+                </div>
+                <p>To align the content of a column to the bottom, use the class <code>#-col-bottom</code> directly on the column.</p>
+                <div class="row">
+                    <div class="sm-col-size-6">*</div>
+                    <div class="sm-col-size-6 sm-col-bottom">.sm-col-bottom</div>
+                </div>
+                <p>To restore the default alignment, use the class <code>#-col-vertical-reset</code> directly on the column.</p>
+                <div class="row sm-cols-middle">
+                    <div class="sm-col-size-6">.sm-cols-middle > *</div>
+                    <div class="sm-col-size-6 sm-col-vertical-reset">.sm-cols-middle > .sm-col-vertical-reset</div>
+                </div>
+                <p>You can also set a default vertical alignment for all columns and redefine alignment for a specic column.</p>
+                <div class="row sm-cols-middle">
+                    <div class="sm-col-size-6">.sm-cols-middle > *</div>
+                    <div class="sm-col-size-6 sm-col-top">.sm-cols-middle > .sm-col-top</div>
+                </div>
+
+
+                <h2>Gutters</h2>
+                <p>By default there are no gutters on the grid. You can add gutters by adding a class <code>#-cols-spaced</code> on a row.</p>
+                <div class="row sm-cols-spaced">
+                    <div class="sm-col-size-4">.sm-cols-spaced > *</div>
+                    <div class="sm-col-size-4">.sm-cols-spaced > *</div>
+                    <div class="sm-col-size-4">.sm-cols-spaced > *</div>
+                </div>
+                <p>You can remove the gutters by adding a class <code>#-cols-collapsed</code> on a row.</p>
+                <div class="row sm-cols-spaced md-cols-collapsed">
+                    <div class="sm-col-size-4">.md-cols-collapsed > *</div>
+                    <div class="sm-col-size-4">.md-cols-collapsed > *</div>
+                    <div class="sm-col-size-4">.md-cols-collapsed > *</div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</body>
+
+</html>

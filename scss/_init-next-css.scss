@@ -1,0 +1,25 @@
+// ---------------------
+// == Init of next
+// == CSS's features
+// ---------------------
+
+@if $target-next-css {
+    // Initializes CSS custom properties
+    :root {
+      --gutter-width: $gutter-width;
+    }
+    $gutter-width: var(--gutter-width) !global;
+    
+    
+    // Initializes CSS custom media queries
+    @custom-media --#{$medium-custom-media-name} #{$medium-up-media-query};
+    $medium-up-media-query: "(--#{$medium-custom-media-name})" !global;
+    
+    @custom-media --#{$large-custom-media-name} #{$large-up-media-query};
+    $large-up-media-query: "(--#{$large-custom-media-name})" !global;
+    
+    @if $use-xl-columns {
+        @custom-media --#{$xlarge-custom-media-name} #{$xlarge-up-media-query};
+        $xlarge-up-media-query: "(--#{$xlarge-custom-media-name})" !global;
+    }
+}
