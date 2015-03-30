@@ -4,12 +4,15 @@
 * Create powerful multi-device layouts quickly and easily with this grid system based on the display table CSS property.
 *
 * @project Amazing CSS Table Grid
-* @version 1.0.0
+* @version 2.0.0
 * @author Loïc Mazé
 * @license MIT Open Source
 */
 :root {
-  --gutter-width: 10px;
+  --small-gutter-width: 20px;
+  --medium-gutter-width: 20px;
+  --large-gutter-width: 20px;
+  --xlarge-gutter-width: 20px;
 }
 
 @custom-media --md-viewport only screen and (min-width:768px);
@@ -17,7 +20,8 @@
 
 
 .row,
-.row > * {
+.row > *,
+.row-with-gutters {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -33,6 +37,7 @@
 
 .row > * {
   display: block;
+  overflow: hidden;
   word-wrap: break-word;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
@@ -50,17 +55,17 @@
   caption-side: bottom;
 }
 
-.sm-cols-spaced > [class*="sm-col-hidden"] + [class*="sm-col-size-"] {
-  padding-left: 0;
+.row-with-gutters {
+  width: auto;
+  /*! Gutter half width */
+  margin-left: -calc(var(--small-gutter-width) / 2);
+  margin-right: -calc(var(--small-gutter-width) / 2);
 }
 
-.sm-cols-spaced > [class*="sm-col-size-"] ~ [class*="sm-col-size-"] {
-  padding-left: var(--gutter-width);
-  /*! Gutter width */
-}
-
-.sm-cols-collapsed > [class*="-col-"] + [class*="-col-"] {
-  padding-left: 0;
+.row-with-gutters > .row > [class*="-col-"] {
+  /*! Gutter half width */
+  padding-left: calc(var(--small-gutter-width) / 2);
+  padding-right: calc(var(--small-gutter-width) / 2);
 }
 
 .sm-cols-center:before,
@@ -180,19 +185,17 @@
     caption-side: bottom;
   }
 
-  .sm-cols-spaced > [class*="md-col-hidden"] + [class*="md-col-size-"],
-  .md-cols-spaced > [class*="md-col-hidden"] + [class*="md-col-size-"] {
-    padding-left: 0;
+  .row-with-gutters {
+    width: auto;
+    /*! Gutter half width */
+    margin-left: -calc(var(--medium-gutter-width) / 2);
+    margin-right: -calc(var(--medium-gutter-width) / 2);
   }
 
-  .sm-cols-spaced > [class*="md-col-size-"] ~ [class*="md-col-size-"],
-  .md-cols-spaced > [class*="md-col-size-"] ~ [class*="md-col-size-"] {
-    padding-left: var(--gutter-width);
-    /*! Gutter width */
-  }
-
-  .md-cols-collapsed > [class*="-col-"] + [class*="-col-"] {
-    padding-left: 0;
+  .row-with-gutters > .row > [class*="-col-"] {
+    /*! Gutter half width */
+    padding-left: calc(var(--medium-gutter-width) / 2);
+    padding-right: calc(var(--medium-gutter-width) / 2);
   }
 
   .md-cols-center:before,
@@ -312,21 +315,17 @@
     caption-side: bottom;
   }
 
-  .sm-cols-spaced > [class*="lg-col-hidden"] + [class*="lg-col-size-"],
-  .md-cols-spaced > [class*="lg-col-hidden"] + [class*="lg-col-size-"],
-  .lg-cols-spaced > [class*="lg-col-hidden"] + [class*="lg-col-size-"] {
-    padding-left: 0;
+  .row-with-gutters {
+    width: auto;
+    /*! Gutter half width */
+    margin-left: -calc(var(--large-gutter-width) / 2);
+    margin-right: -calc(var(--large-gutter-width) / 2);
   }
 
-  .sm-cols-spaced > [class*="lg-col-size-"] ~ [class*="lg-col-size-"],
-  .md-cols-spaced > [class*="lg-col-size-"] ~ [class*="lg-col-size-"],
-  .lg-cols-spaced > [class*="lg-col-size-"] ~ [class*="lg-col-size-"] {
-    padding-left: var(--gutter-width);
-    /*! Gutter width */
-  }
-
-  .lg-cols-collapsed > [class*="-col-"] + [class*="-col-"] {
-    padding-left: 0;
+  .row-with-gutters > .row > [class*="-col-"] {
+    /*! Gutter half width */
+    padding-left: calc(var(--large-gutter-width) / 2);
+    padding-right: calc(var(--large-gutter-width) / 2);
   }
 
   .lg-cols-center:before,

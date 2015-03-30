@@ -14,6 +14,8 @@
 
 @import "config";
 @import "init-next-css";
+$row-class-name: #{$namespace}row;
+$gutters-class-name: #{$namespace}row-with-gutters;
 
 
 // Get the prefix to add for most CSS class names
@@ -24,11 +26,11 @@
 
 // Lines ordering
 @mixin grid-lines-ordering($col-prefix) {
-    .#{$namespace}row > .#{$col-prefix}-first-line {
+    .#{$row-class-name} > .#{$col-prefix}-first-line {
         display: table-caption;
         caption-side: top;
     }
-    .#{$namespace}row > .#{$col-prefix}-last-line {
+    .#{$row-class-name} > .#{$col-prefix}-last-line {
         display: table-caption;
         caption-side: bottom;
     }
@@ -36,57 +38,43 @@
 
 
 // Gutters
-@mixin grid-gutters($col-type, $col-prefix) {
-    $sm-col-prefix: get-col-prefix(sm);
-    $md-col-prefix: get-col-prefix(md);
-    $lg-col-prefix: get-col-prefix(lg);
-        
-    @if $col-type == sm {
-        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"] {
-            padding-left: 0;
+@mixin grid-gutters($col-type) {    
+    .#{$gutters-class-name} {
+        width: auto;
+        /*! Gutter half width */
+        @if $col-type == sm {
+            margin-left: -($small-gutter-half-width);
+            margin-right: -($small-gutter-half-width);
+        } @else if $col-type == md {
+            margin-left: -($medium-gutter-half-width);
+            margin-right: -($medium-gutter-half-width);
+        } @else if $col-type == lg {
+            margin-left: -($large-gutter-half-width);
+            margin-right: -($large-gutter-half-width);
+        } @else if $col-type == xl {
+            margin-left: -($xlarge-gutter-half-width);
+            margin-right: -($xlarge-gutter-half-width);
+        } @else {
+            @error "$col-type must be sm, md, lg or xl, but was #{$col-type}.";
         }
-        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"] {
-            padding-left: $gutter-width; /*! Gutter width */
-        }
-    } @else if $col-type == md {
-        .#{$sm-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"],
-        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"] {
-            padding-left: 0;
-        }
-        .#{$sm-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"],
-        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"] {
-            padding-left: $gutter-width; /*! Gutter width */
-        }
-    } @else if $col-type == lg {
-        .#{$sm-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"],
-        .#{$md-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"],
-        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"] {
-            padding-left: 0;
-        }
-        .#{$sm-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"],
-        .#{$md-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"],
-        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"] {
-            padding-left: $gutter-width; /*! Gutter width */
-        }
-    } @else if $col-type == xl {
-        .#{$sm-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"],
-        .#{$md-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"],
-        .#{$lg-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"],
-        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-hidden"] + [class*="#{$col-prefix}-col-size-"] {
-            padding-left: 0;
-        }
-        .#{$sm-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"],
-        .#{$md-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"],
-        .#{$lg-col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"],
-        .#{$col-prefix}-cols-spaced > [class*="#{$col-prefix}-col-size-"] ~ [class*="#{$col-prefix}-col-size-"] {
-            padding-left: $gutter-width; /*! Gutter width */
-        }
-    } @else {
-        @error "$col-type must be sm,md,lg or xl, but was #{$col-type}.";
     }
-    
-    .#{$col-prefix}-cols-collapsed > [class*="-col-"] + [class*="-col-"] {
-        padding-left: 0;
+    .#{$gutters-class-name} > .#{$row-class-name} > [class*="-col-"] {
+        /*! Gutter half width */
+        @if $col-type == sm {
+            padding-left: $small-gutter-half-width;
+            padding-right: $small-gutter-half-width;
+        } @else if $col-type == md {
+            padding-left: $medium-gutter-half-width;
+            padding-right: $medium-gutter-half-width;
+        } @else if $col-type == lg {
+            padding-left: $large-gutter-half-width;
+            padding-right: $large-gutter-half-width;
+        } @else if $col-type == xl {
+            padding-left: $xlarge-gutter-half-width;
+            padding-right: $xlarge-gutter-half-width;
+        } @else {
+            @error "$col-type must be sm, md, lg or xl, but was #{$col-type}.";
+        }
     }
 }
 
@@ -144,7 +132,7 @@
 
 // Columns visibility
 @mixin grid-cols-visibility($col-prefix) {
-    .#{$namespace}row > [class*="#{$col-prefix}-col-hidden"] {
+    .#{$row-class-name} > [class*="#{$col-prefix}-col-hidden"] {
         display: none;
     }
 }
@@ -152,7 +140,7 @@
 
 // Columns width
 @mixin grid-cols-width($col-prefix) {
-    .#{$namespace}row > [class*="#{$col-prefix}-col-size-"] {
+    .#{$row-class-name} > [class*="#{$col-prefix}-col-size-"] {
         display: table-cell;
     }
     .#{$col-prefix}-col-size-auto {
@@ -172,7 +160,7 @@
     $col-prefix: get-col-prefix($col-type);
     // Be careful! The order of inclusion is important
     @include grid-lines-ordering($col-prefix);
-    @include grid-gutters($col-type, $col-prefix);
+    @include grid-gutters($col-type);
     @include grid-cols-horizontal-align($col-prefix);
     @include grid-cols-vertical-align($col-prefix);
     @include grid-col-vertical-align($col-prefix);
@@ -183,21 +171,23 @@
 
 // Grid
 @mixin grid() {
-    .#{$namespace}row,
-    .#{$namespace}row > * {
+    .#{$row-class-name},
+    .#{$row-class-name} > *,
+    .#{$gutters-class-name} {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
     }
-    .#{$namespace}row {
+    .#{$row-class-name} {
         display: table;
         width: 100%;
         table-layout: fixed;
         border-collapse: collapse;
         border-spacing: 0;
     }
-    .#{$namespace}row > * {
+    .#{$row-class-name} > * {
         display: block;
+        overflow: hidden;
         word-wrap: break-word;
         -webkit-hyphens: auto;
         -moz-hyphens: auto;

@@ -9,7 +9,14 @@ $namespace: "" !default;
 $use-xl-columns: false !default;
 
 // Set the width of the gutters
-$gutter-width: 10px !default;
+$small-gutter-width: 20px !default;
+$medium-gutter-width: 20px !default;
+$large-gutter-width: 20px !default;
+$xlarge-gutter-width: 20px !default;
+$small-gutter-half-width: ($small-gutter-width / 2);
+$medium-gutter-half-width: ($medium-gutter-width / 2);
+$large-gutter-half-width: ($large-gutter-width / 2);
+$xlarge-gutter-half-width: ($xlarge-gutter-width / 2);
 
 // Set the total number of columns
 $number-of-columns: 12 !default;

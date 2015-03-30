@@ -6,9 +6,15 @@
 @if $target-next-css {
     // Initializes CSS custom properties
     :root {
-      --gutter-width: $gutter-width;
+        --small-gutter-width: $small-gutter-width;
+        --medium-gutter-width: $medium-gutter-width;
+        --large-gutter-width: $large-gutter-width;
+        --xlarge-gutter-width: $xlarge-gutter-width;
     }
-    $gutter-width: var(--gutter-width) !global;
+    $small-gutter-half-width: calc(var(--small-gutter-width) / 2) !global;
+    $medium-gutter-half-width: calc(var(--medium-gutter-width) / 2) !global;
+    $large-gutter-half-width: calc(var(--large-gutter-width) / 2) !global;
+    $xlarge-gutter-half-width: calc(var(--xlarge-gutter-width) / 2) !global;
     
     
     // Initializes CSS custom media queries

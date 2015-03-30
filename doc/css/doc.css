@@ -151,9 +151,9 @@ main {
 .row > * {
     height: 50px;
     height: 5rem;
-    background-color: #cdb5d3;
+    background-color: #dbcdde;
     border-color: #8e5d9a;
-    border-style: dashed;
+    border-style: solid;
     border-width: 2px;
     border-width: 0.2rem;
 }

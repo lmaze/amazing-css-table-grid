@@ -33,20 +33,20 @@
                 <h1 class="visuallyhidden">Introduction</h1>
 
                 <h2>Why another grid ?</h2>
-                <p>Almost all current grid systems are based on the display <code>inline-block</code> CSS property or on floating elements. There are several problems and limitations with this approach. For example it is not possible to easily make columns of the same height or vertically aligning column content. The use of negative margins can also be problematic. So here is a grid based on the display <code>table</code> property which making some kind of magic ;-)</p>
+                <p>Almost all current grid systems are based on the display <code>inline-block</code> CSS property or on floating elements. There are several problems and limitations with this approach. For example it is not possible to easily make columns of the same height or vertically aligning column content. So here is a grid based on the display <code>table</code> property which making some kind of magic ;-)</p>
 
                 <h2>Compatibility</h2>
                 <p>You can use this grid system with all browsers that are compatible with CSS 2.1. In practice it covers almost all browsers except Internet Explorer below version 8. You can get more information on <a href="http://caniuse.com/#feat=css-table" target="_blank">caniuse</a>.</p>
                 <p>If you want the grid to be responsive in IE8 you must include a polyfill like <a href="https://github.com/scottjehl/Respond" target="_blank">Respond.js</a> to support media queries. This operation is not necessary for other browsers, <strong>only CSS is needed</strong>.</p>
                 
                 <h2>Which version do you need?</h2>
-                <p>This grid comes in three flavours : classic version, postprocessor version, and Sass version.</p>
+                <p>This grid comes in three flavours: classic version, postprocessor version, and Sass version.</p>
                 <h3>Classic version</h3>
                 <p>If you aim to use this grid system without changing it's configuration, just download the CSS file <code>table-grid.css</code> in your project. You should at least rewrite the media queries to have custom breakpoints.</p>
                 <h3>Postprocessor version</h3>
                 <p>If you use only a postprocessor like <a href="http://pleeease.io/" target="_blank">Pleeease</a> or <a href="http://www.myth.io/" target="_blank">Myth</a>, you should grab the CSS file <code>table-grid.next.css</code>. At the start of this file you can change the custom media queries and set the custom properties with your own values.</p>
                 <h3>Sass version</h3>
-                <p>If you're used to deal with the <a href="http://sass-lang.com/" target="_blank">Sass</a> preprocessor, your best choice is to install this version : it is far more flexible and scalable than the basic CSS and the postprocessor versions. In the <code>_config.scss</code> file you can :</p>
+                <p>If you're used to deal with the <a href="http://sass-lang.com/" target="_blank">Sass</a> preprocessor, your best choice is to install this version: it is far more flexible and scalable than the basic CSS and the postprocessor versions. In the <code>_config.scss</code> file you can:</p>
                 <ul>
                     <li>Enable the xl columns</li>
                     <li>Set a prefix for all the CSS class names (<code>tg-</code> for example)</li>
@@ -55,10 +55,17 @@
                     <li>Set the media queries configuration</li>
                     <li>Enable the use of future CSS's features (postprocessor required) and set the custom media queries configuration</li>
                 </ul>
-
-
+                
+                <h2>Limitations</h2>
+                <p>There are still some limitations you should be aware:</p>
+                <ul>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin" target="_blank">You can't set margins on columns.</a> You can use the <code>padding</code> property instead which is compatible with the display <code>table-cell</code> property.</li>
+                    <li>It is not possible to exceed the maximum number of columns per row (12 by default).</li>
+                    <li>If you want gutters you must add a parent container for the row.</li>
+                </ul>
+                
                 <h2>Download</h2>
-                <p>All versions of this amazing CSS table grid are available on <a href="https://github.com/lmaze/amazing-css-table-grid" target="_blank">GitHub</a>.</p>
+                <p>All versions are available on <a href="https://github.com/lmaze/amazing-css-table-grid" target="_blank">GitHub</a>.</p>
             </section>
 
 
@@ -108,7 +115,7 @@
                 <p>This grid system has three tiers of classes: <code>sm</code> (phones), <code>md</code> (tablets), <code>lg</code> (desktops). You can also enable a <code>xl</code> class if you use the Sass version of the grid. You can use nearly any combination of these classes to create more dynamic and flexible layouts.<p>
                 <p>Each tier of classes scales up, meaning if you plan on setting the same widths for <code>sm</code> and <code>md</code>, you only need to specify <code>sm</code>.</p>
                 <div class="row">
-                    <div class="sm-col-size-4 md-col-size-8">.sm-col-size-4 .md-col-size-8"</div>
+                    <div class="sm-col-size-4 md-col-size-8">.sm-col-size-4 .md-col-size-8</div>
                     <div class="sm-col-size-8 md-col-size-4">.sm-col-size-8 .md-col-size-4</div>
                 </div>
 
@@ -232,17 +239,14 @@
 
 
                 <h2>Gutters</h2>
-                <p>By default there are no gutters on the grid. You can add gutters by adding a class <code>#-cols-spaced</code> on a row.</p>
-                <div class="row sm-cols-spaced">
-                    <div class="sm-col-size-4">.sm-cols-spaced > *</div>
-                    <div class="sm-col-size-4">.sm-cols-spaced > *</div>
-                    <div class="sm-col-size-4">.sm-cols-spaced > *</div>
-                </div>
-                <p>You can remove the gutters by adding a class <code>#-cols-collapsed</code> on a row.</p>
-                <div class="row sm-cols-spaced md-cols-collapsed">
-                    <div class="sm-col-size-4">.md-cols-collapsed > *</div>
-                    <div class="sm-col-size-4">.md-cols-collapsed > *</div>
-                    <div class="sm-col-size-4">.md-cols-collapsed > *</div>
+                <p>By default there are no gutters on the grid. You can add gutters by adding a class <code>row-with-gutters</code> on the parent of the row.</p>
+                <p>Gutters use negative margins like most other grids. In some situations you may need to add a <code>overflow: hidden</code> property on the parent which contains the whole grid.</p>
+                <div class="row-with-gutters">
+                    <div class="row">
+                        <div class="sm-col-size-4">.row-with-gutters > .row > *</div>
+                        <div class="sm-col-size-4">.row-with-gutters > .row > *</div>
+                        <div class="sm-col-size-4">.row-with-gutters > .row > *</div>
+                    </div>
                 </div>
             </section>
 

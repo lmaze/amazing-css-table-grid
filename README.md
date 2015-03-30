@@ -7,7 +7,7 @@ To get started, check out <http://lmaze.github.io/amazing-css-table-grid/>.
 
 ## Why another grid ?
 
-Almost all current grid systems are based on the display `inline-block` CSS property or on floating elements. There are several problems and limitations with this approach. For example it is not possible to easily make columns of the same height or vertically aligning column content. The use of negative margins can also be problematic. So here is a grid based on the display `table` property which making some kind of magic ;-)
+Almost all current grid systems are based on the display `inline-block` CSS property or on floating elements. There are several problems and limitations with this approach. For example it is not possible to easily make columns of the same height or vertically aligning column content. So here is a grid based on the display `table` property which making some kind of magic ;-)
 
 
 ## Compatibility
@@ -19,7 +19,7 @@ If you want the grid to be responsive in IE8 you must include a polyfill like [R
 
 ## Which version do you need?
 
-This grid comes in three flavours : classic version, postprocessor version, and Sass version.
+This grid comes in three flavours: classic version, postprocessor version, and Sass version.
 
 ### Classic version
 
@@ -30,7 +30,7 @@ If you use only a postprocessor like [Pleeease](http://pleeease.io/) or [Myth](h
 
 ### Sass version
 
-If you're used to deal with the [Sass](http://sass-lang.com/) preprocessor, your best choice is to install this version : it is far more flexible and scalable than the basic CSS and the postprocessor versions. In the `_config.scss` file you can :
+If you're used to deal with the [Sass](http://sass-lang.com/) preprocessor, your best choice is to install this version: it is far more flexible and scalable than the basic CSS and the postprocessor versions. In the `_config.scss` file you can:
 
 * Enable the xl columns
 * Set a prefix for all the CSS class names (`tg-` for example)
@@ -38,3 +38,12 @@ If you're used to deal with the [Sass](http://sass-lang.com/) preprocessor, your
 * Set the total number of columns
 * Set the media queries configuration
 * Enable the use of future CSS's features (postprocessor required) and set the custom media queries configuration
+
+
+## Limitations
+
+There are still some limitations you should be aware:
+
+* [You can't set margins on columns.](https://developer.mozilla.org/en-US/docs/Web/CSS/margin) You can use the `padding` property instead which is compatible with the display `table-cell` property.
+* It is not possible to exceed the maximum number of columns per row (12 by default).
+* If you want gutters you must add a parent container for the row.
